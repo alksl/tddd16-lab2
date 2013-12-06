@@ -1,0 +1,10 @@
+ABC             // ID 'ABC'
+ABC123          // ID 'ABC123'
+E2              // ID 'E2'
+ABC_123         // ID 'ABC_123'
+ABC_123_ABC     // ID 'ABC_123_ABC'
+
+123ABC          // INTEGER '123' 
+                // ID 'ABC'
+_ABC123_        // '_'
+                // ID 'ANBC123_'

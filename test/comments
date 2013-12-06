@@ -1,0 +1,11 @@
+1   // Here is a C++ style comment
+2   // Here is a C++ style comment with a // inside of it
+3   // Here is one with a C style /* comment */ inside
+
+4   /* Here is a C style comment */
+5   /* Here is a C style comment with a // inside of it */
+6   /* This is a 
+       multiline
+       comment */
+7   /* This should cause /* a warning */
+8   /* This should casue /* a warning */ and five tokens */
