@@ -1,9 +1,9 @@
 %{
 
-#include "scanner.h"
+#include <scanner.h>
 
 /* --- Your code here ---
- * 
+ *
  * This is where C declarations go. If you need to include
  * files for the actions below, this is where you do it.
  */
@@ -18,7 +18,6 @@ extern void yyerror(char *);
 %option 8bit
 %option caseless
 %option nodefault
-%option outfile="scanner.cc"
 
 /* --- Your code here ---
  *

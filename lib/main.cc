@@ -1,9 +1,9 @@
-#include <iostream.h>
-#include <iomanip.h>
+#include <iostream>
+#include <iomanip>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "scanner.h"
+#include <scanner.h>
 
 typedef struct
 {
@@ -44,7 +44,7 @@ tTokenName tokens[] = {{ FUNCTION,   "FUNCTION" },
 int numTokens = sizeof(tokens)/sizeof(*tokens);
 
 
-ostream& PrintToken(ostream& o, int token)
+std::ostream& PrintToken(std::ostream& o, int token)
 {
     int i;
     extern char *yytext;
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
         }
         break;
     default:
-        cerr << "Usage: " << argv[0] << " [ filename ]\n";
+        std::cerr << "Usage: " << argv[0] << " [ filename ]\n";
         exit(1);
     }
 
@@ -103,10 +103,11 @@ int main(int argc, char **argv)
 
     while ((token = yylex()) != 0)
     {
-      cout << "Scanned "; PrintToken(cout, token); cout << '\n' << flush;
+      std::cout << "Scanned "; PrintToken(std::cout, token);
+      std::cout << '\n' << std::flush;
     }
 
-    cout << "End of file\n";
+    std::cout << "End of file\n";
     exit(0);
 }
 
@@ -114,5 +115,5 @@ void yyerror(char *msg)
 {
     extern int yylineno;
 
-    cerr << "Error at line " << yylineno << ": " << msg << '\n' << flush;
+    std::cerr << "Error at line " << yylineno << ": " << msg << '\n' << std::flush;
 }
