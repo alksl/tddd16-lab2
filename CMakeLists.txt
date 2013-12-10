@@ -18,8 +18,9 @@ add_executable(scanner_test
   test/scanner_test.cc
 )
 target_link_libraries(scanner_test ${CORELIBS} gtest gtest_main)
+add_test(scanner_test ${CMAKE_BINARY_DIR}/scanner_test)
 
-add_executable(s
+add_executable(scanner
   ${FLEX_scanner_OUTPUTS}
   lib/main.cc
 )
