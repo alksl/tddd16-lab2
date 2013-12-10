@@ -55,7 +55,6 @@ of                                  return OF;
 
 
 
+(.|\n)                              return yytext[0];
 <<EOF>>                             yyterminate();
-.                                   return yytext[0];
-
 %%
