@@ -28,6 +28,10 @@ integer_with_exponent             {integer}{exponent}
 
 identifier                        [a-zA-Z][a-zA-Z0-9_]*
 
+cpp_comment                       \/\/.*\n
+
+whitespace                        [ \t]*
+
 %%
 
 if                                  return IF;
@@ -58,6 +62,10 @@ of                                  return OF;
 {real}                              return REAL;
 {integer_with_exponent}             return REAL;
 {integer}                           return INTEGER;
+
+{cpp_comment}                       { }
+
+{whitespace}                        { }
 
 (.|\n)                              return yytext[0];
 <<EOF>>                             yyterminate();

@@ -178,7 +178,7 @@ TEST_F(ScannerTest, leading_underscore_and_identifier) {
 }
 
 TEST_F(ScannerTest, cpp_comment){
-  scan("1  // Here is a C++ style comment\n");
+  scan("1  // Here is a C++ style comment\n\n");
   assert_token(INTEGER, "1");
   assert_newline();
 }
