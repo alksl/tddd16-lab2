@@ -18,11 +18,11 @@ protected:
 
   void scan(std::string input_string) {
     fprintf(input, "%s\n", input_string.c_str());
+    freopen(test_file, "r", input);
+    yyrestart(input);
   }
 
   void assert_token(int expected_token, std::string expected_string) {
-    freopen(test_file, "r", input);
-    yyrestart(input);
     ASSERT_EQ(expected_token, yylex());
     ASSERT_STREQ(expected_string.c_str(), yytext);
   }

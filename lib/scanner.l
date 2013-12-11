@@ -26,6 +26,8 @@ exponent                          [Ee]({sign})?{integer}
 real                              (\.{integer}|{integer}\.({integer})?)({exponent})?
 integer_with_exponent             {integer}{exponent}
 
+identifier                        [a-zA-Z][a-zA-Z0-9_]*
+
 %%
 
 if                                  return IF;
@@ -50,6 +52,8 @@ not                                 return NOT;
 "<>"                                return NE;
 array                               return ARRAY;
 of                                  return OF;
+
+{identifier}                        return ID;
 
 {real}                              return REAL;
 {integer_with_exponent}             return REAL;
