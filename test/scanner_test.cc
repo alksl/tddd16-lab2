@@ -55,7 +55,7 @@ TEST_F(ScannerTest, integer_multiple_digit) {
   assert_token(INTEGER, "123");
 }
 
-TEST_F(ScannerTest, real_with_following_dow) {
+TEST_F(ScannerTest, real_with_following_dot) {
   scan("123.");
   assert_token(REAL, "123.");
 }

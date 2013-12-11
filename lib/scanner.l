@@ -19,13 +19,12 @@ extern void yyerror(char *);
 %option caseless
 %option nodefault
 
-/* --- Your code here ---
- *
- * This is where Flex declarations go. If you need to include
- * any such declarations, this is where you do it.
- */
-
-/* --- End your code --- */
+digit                             [0-9]
+integer                           {digit}+
+sign                              [+-]
+exponent                          [Ee]({sign})?{integer}
+real                              (\.{integer}|{integer}\.({integer})?)({exponent})?
+integer_with_exponent             {integer}{exponent}
 
 %%
 
@@ -52,8 +51,9 @@ not                                 return NOT;
 array                               return ARRAY;
 of                                  return OF;
 
-
-
+{real}                              return REAL;
+{integer_with_exponent}             return REAL;
+{integer}                           return INTEGER;
 
 (.|\n)                              return yytext[0];
 <<EOF>>                             yyterminate();
