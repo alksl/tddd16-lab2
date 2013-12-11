@@ -1,16 +1,24 @@
 %{
 
+#include <iostream>
+#include <sstream>
 #include <scanner.h>
+#include <string>
+#include <vector>
 
-/* --- Your code here ---
- *
- * This is where C declarations go. If you need to include
- * files for the actions below, this is where you do it.
- */
+std::vector<std::string> scanner_warnings;
 
-/* --- End your code --- */
+void warning(std::string msg) {
+  std::stringstream ss;
+  ss << "Warning (line ";
+  ss << yylineno;
+  ss << "): ";
+  ss << msg;
+  ss << std::endl;
+  scanner_warnings.push_back(msg);
+  std::cerr << ss.str();
+}
 
-extern void yyerror(char *);
 %}
 
 %option yylineno
@@ -32,6 +40,7 @@ cpp_comment                       \/\/.*\n
 
 whitespace                        [ \t]*
 
+%x comment
 %%
 
 if                                  return IF;
@@ -64,6 +73,15 @@ of                                  return OF;
 {integer}                           return INTEGER;
 
 {cpp_comment}                       { }
+
+"/*"                                BEGIN(comment);
+<comment>"/*"                       { warning("Starting comment inside another comment!!!"); }
+<comment>"/"                        { }
+<comment>[^/*\n]*                   { }
+<comment>"*"+[^*/\n]*               { }
+<comment>\n                         { }
+<comment>"*/"                       BEGIN(INITIAL);
+
 
 {whitespace}                        { }
 

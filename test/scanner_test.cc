@@ -7,12 +7,14 @@ extern  FILE* yyin;
 extern  char* yytext;
 extern  int yylex();
 extern  void yyrestart(FILE*);
+extern  std::vector<std::string> scanner_warnings;
 
 namespace {
 
 class ScannerTest : public ::testing::Test {
 protected:
   ScannerTest() {
+    scanner_warnings.clear();
     input = fopen(test_file, "w");
   }
 
@@ -32,7 +34,10 @@ protected:
   }
 
   void assert_warning() {
-    // TODO make assertion for flex warning here
+    ASSERT_GT(scanner_warnings.size(), 0);
+    ASSERT_EQ(
+      "Starting comment inside another comment!!!",
+      scanner_warnings.front());
   }
 
   virtual ~ScannerTest() {
@@ -224,11 +229,13 @@ TEST_F(ScannerTest, multiline_comment_inside_multiline_with_tokens) {
   scan("8  /* This should casue /* a warning */ and five tokens */\n");
   assert_token(INTEGER, "8");
   // assert nothing (comment)
-  assert_warning();
   assert_token(AND, "and");
   assert_token(ID, "five");
   assert_token(ID, "tokens");
   assert_token((int)'*', "*");
+  assert_token((int)'/', "/");
+  assert_newline();
+  assert_warning();
 }
 
 }
